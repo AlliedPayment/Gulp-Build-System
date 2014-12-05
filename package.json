@@ -1,0 +1,22 @@
+{
+  "name": "gulp JS builder",
+  "description": "Lints, concats, and uglifies/minifies JS files",
+  "preferGlobal": true,
+  "version": "0.0.1",
+  "authors": [
+    "Nate Ross               <nross63@gmail.com"
+  ],
+  "keywords": [
+    "node",
+    "JS",
+    "gulp"
+  ],
+  "dependencies": {
+    "gulp": "*",
+    "gulp-watch":"*",
+    "gulp-jshint":"*",
+    "gulp-concat":"*",
+    "gulp-rename":"*",
+    "gulp-uglify":"*"
+  }
+}
