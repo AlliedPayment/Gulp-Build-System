@@ -1,5 +1,5 @@
 {
-  "name": "gulp JS builder",
+  "name": "gulp-jsBuilder",
   "description": "Lints, concats, and uglifies/minifies JS files",
   "preferGlobal": true,
   "version": "0.0.1",
