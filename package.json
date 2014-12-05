@@ -1,22 +1,35 @@
 {
-  "name": "gulp-jsBuilder",
-  "description": "Lints, concats, and uglifies/minifies JS files",
-  "preferGlobal": true,
-  "version": "0.0.1",
-  "authors": [
-    "Nate Ross               <nross63@gmail.com"
-  ],
-  "keywords": [
-    "node",
-    "JS",
-    "gulp"
-  ],
-  "dependencies": {
-    "gulp": "*",
-    "gulp-watch":"*",
-    "gulp-jshint":"*",
-    "gulp-concat":"*",
-    "gulp-rename":"*",
-    "gulp-uglify":"*"
-  }
+    "name": "gulp-jsBuilder",
+    "description": "Lints, concats, and uglifies/minifies JS files",
+    "preferGlobal": true,
+    "version": "0.0.1",
+    "authors": [
+        "Nate Ross               <nross63@gmail.com"
+    ],
+    "keywords": [
+        "node",
+        "JS",
+        "gulp"
+    ],
+     "homepage": "https://github.com/nross63/gulp-jsBuilder",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nross63/gulp-jsBuilder.git"
+    },
+    "bugs": {
+        "url": "https://github.com/nross63/gulp-jsBuilder/issues"
+    },
+    "license": {
+        "type": "MIT",
+        "url": "https://github.com/nross63/gulp-jsBuilder/LICENSE"
+    },
+    "dependencies": {
+        "gulp": "*",
+        "gulp-watch": "*",
+        "gulp-jshint": "*",
+        "gulp-concat": "*",
+        "gulp-uglify": "*",
+        "gulp-sourcemaps":"*",
+        "rimraf": "*"
+    }
 }

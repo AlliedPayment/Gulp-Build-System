@@ -1,47 +1,49 @@
-var gulp = require('gulp'),
-    watch = require('gulp-watch'),
-    jshint = require('gulp-jshint'),
-    concat = require('gulp-concat'),
-    rename = require('gulp-rename'),
-    uglify = require('gulp-uglify');
+var gulp = require('gulp');
+var watch = require('gulp-watch');
+var jshint = require('gulp-jshint');
+var concat = require('gulp-concat');
+var sourcemaps = require('gulp-sourcemaps');
+var uglify = require('gulp-uglify');
+var rimraf = require('rimraf');
 
-var paths ={
-    src: {
-        js: "path/to/js"
-    },
-    dst: {
-        js: "path/to/dst"
-    }
-
+var paths = {
+    js: "./js/**/*.js",
+    dst: "./build/"
 };
+
+//clean build directory cmd $> gulp clean
+gulp.task('clean', function(cb) {
+    rimraf(paths.dst, cb);
+});
 
 /*-------------------------------------------------------------------------- JAVASCRIPT
  */
 
-// Lint JS
+// Lint JS              cmd $> gulp jshint
 gulp.task('jshint', function() {
-    return gulp.src(paths.src.js)
+    return gulp.src(paths.js)
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
 
-// Concat & Minify JS
-gulp.task('gulpJS', function() {
-    return gulp.src(paths.src.js)
+/*
+ * Clean build dir, lints JS files, generates sourcemaps,
+ * uglifies JS files, concats JS into all.min.js,
+ * writes sourcemaps, outputs js file into build dir
+ * cmd $> gulp scrips
+ */
+gulp.task('scripts', ['clean', 'jshint'], function() {
+    return gulp.src(paths.js)
         .pipe(sourcemaps.init())
         .pipe(uglify())
-        .pipe(rename('all.min.js'))
+        .pipe(concat('all.min.js'))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest(paths.dst.js));
+        .pipe(gulp.dest(paths.dst));
 });
 
-// Watch JS
+// Watch JS         cmd $> gulp watchJS
 gulp.task('watchJS', function() {
-    return watch(paths.src.js, ['gulpJS']);
+    return watch(paths.js, ['scripts']);
 });
 
-/*-------------------------------------------------------------------------- TASKS
- */
-
-
-gulp.task('default', ['watchJS']);
+gulp.task('default', ['scripts']); // default task is run when simply running $> gulp
