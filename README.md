@@ -5,6 +5,7 @@
  - `npm install`
 
 ### Usage
+- clone repository: `git clone https://github.com/wickdninja/Gulp-Build-System.git`    
 - `cd ` into project directory
 - execute `gulp` to execute a single build of JS and Less assets
 - execute `gulp watch` to execute a single build and watch assets for changes and trigger another build
