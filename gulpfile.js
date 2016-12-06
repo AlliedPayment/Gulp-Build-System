@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var watch = require('gulp-watch');
 var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
@@ -15,22 +14,22 @@ var paths = {
     dst: "./dist/",
 };
 
-//clean build directory cmd $> gulp clean
+//clean dist directory cmd $> gulp clean
 gulp.task('clean', function (cb) {
     rimraf(paths.dst, cb);
 });
 
 
 /*-------------------------------------------------------------------------- LESS & CSS
- */ 
+ */
 gulp.task('less', function () {
-  return gulp.src(paths.less)
-    .pipe(less({
-      paths: [ path.join(__dirname, 'less', 'includes') ]
-    }))
-    .pipe(concatCss("all.css"))
-    .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(gulp.dest('./dist'));
+    return gulp.src(paths.less)
+        .pipe(less({
+            paths: [path.join(__dirname, 'less', 'includes')]
+        }))
+        .pipe(concatCss("all.min.css"))
+        .pipe(cleanCSS({ compatibility: 'ie8' }))
+        .pipe(gulp.dest('./dist'));
 });
 
 
@@ -43,7 +42,7 @@ gulp.task('less', function () {
  * writes sourcemaps, outputs js file into build dir
  * cmd $> gulp scrips
  */
-gulp.task('scripts', ['clean'], function () {
+gulp.task('js', function () {
     return gulp.src(paths.js)
         .pipe(sourcemaps.init())
         .pipe(uglify())
@@ -52,9 +51,20 @@ gulp.task('scripts', ['clean'], function () {
         .pipe(gulp.dest(paths.dst));
 });
 
-// Watch JS         cmd $> gulp watchJS
-gulp.task('watchJS', function () {
-    return watch(paths.js, ['scripts']);
+// Watch JS         cmd $> gulp watch:js
+gulp.task('watch:js', ['clean'], function () {
+    return gulp.watch(paths.js, ['js']);
 });
 
-gulp.task('default', ['less', 'scripts']); // default task is run when simply running $> gulp
+// Watch LESS         cmd $> gulp watch:less
+gulp.task('watch:less', ['clean', 'less'], function () {
+    return gulp.watch(paths.less, ['less']);
+});
+
+
+// Watch All         cmd $> gulp watch
+gulp.task('watch', ['clean', 'less', 'js'], function () {
+    return gulp.watch([paths.less, paths.js], ['less', 'js']);
+});
+
+gulp.task('default', ['clean', 'less', 'js']); // default task is run when simply running $> gulp
