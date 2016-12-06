@@ -13,9 +13,9 @@
 ### Tasks
 - clean     ***(cleans dist directory)***     
 `gulp clean`
-- less         ***(compiles less files into css, concatenates & minifies css files into dis/all.min.css)***     
+- less         ***(compiles less files into css, concatenates & minifies css files into dist/all.min.css)***     
 `gulp less`
-- scripts      ***(concatenates & minifies js files into dis/all.min.js)***     
+- scripts      ***(concatenates & minifies js files into dist/all.min.js)***     
 `gulp scripts`
 - default ***(runs clean, less & scripts)***    
 `gulp`
